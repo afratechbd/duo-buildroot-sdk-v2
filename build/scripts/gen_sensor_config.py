@@ -97,6 +97,7 @@ def gen_sensor_tuning_param_list():
         return kconfig_param_config_default_tmpl
 
     chip_list = os.listdir(isp_tuning_path)
+    print(chip_list)
 
     for arch in chip_list:
         if os.path.isdir(os.path.join(isp_tuning_path, arch)) and arch != ".git":
