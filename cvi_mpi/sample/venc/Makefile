@@ -47,6 +47,7 @@ endif
 
 EXTRA_CFLAGS = $(INCS) $(DEFS)
 EXTRA_LDFLAGS = $(LIBS) -lini -lpthread
+EXTRA_LDFLAGS += -latomic
 
 EXTRA_LDFLAGS_WITH_ASAN = -Wl,-Bdynamic $(LIBS) -lini -lpthread
 
