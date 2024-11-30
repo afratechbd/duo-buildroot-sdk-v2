@@ -10,7 +10,6 @@
 #include <rtsp.h>
 #include <sample_comm.h>
 #include "cvi_tdl.h"
-#include "cvi_tdl_media.h"
 
 #include <pthread.h>
 #include <signal.h>
@@ -27,7 +26,6 @@ static uint32_t g_size = 0;
 
 MUTEXAUTOLOCK_INIT(ResultMutex);
 
-
 typedef struct {
   SAMPLE_TDL_MW_CONTEXT *pstMWContext;
   cvitdl_service_handle_t stServiceHandle;
@@ -41,8 +39,7 @@ void *run_venc(void *args) {
   cvtdl_face_t stFaceMeta = {0};
 
   while (bExit == false) {
-    char * rtsp_url = "rtsp://admin:admin1234@192.168.0.135/cam/realmonitor?channel=1&subtype=00";
-    s32Ret = read_rtsp_frame(rtsp_url,&stFrame, PIXEL_FORMAT_RGB_888_PLANAR);
+    s32Ret = CVI_VPSS_GetChnFrame(0, 0, &stFrame, 2000);
     if (s32Ret != CVI_SUCCESS) {
       printf("CVI_VPSS_GetChnFrame chn0 failed with %#x\n", s32Ret);
       break;
@@ -92,13 +89,10 @@ void *run_tdl_thread(void *pHandle) {
 
   CVI_S32 s32Ret;
   while (bExit == false) {
-    //s32Ret = CVI_VPSS_GetChnFrame(0, VPSS_CHN1, &stFrame, 2000);
-    //read data from rtsp stream using openCV, load data to stFrame
-    char * rtsp_url = "rtsp://admin:admin1234@192.168.0.135/cam/realmonitor?channel=1&subtype=00";
-    s32Ret = read_rtsp_frame(rtsp_url,&stFrame, PIXEL_FORMAT_RGB_888_PLANAR);
+    s32Ret = CVI_VPSS_GetChnFrame(0, VPSS_CHN1, &stFrame, 2000);
 
     if (s32Ret != CVI_SUCCESS) {
-      printf("read_rtsp_frame failed with %#x\n", s32Ret);
+      printf("CVI_VPSS_GetChnFrame failed with %#x\n", s32Ret);
       goto get_frame_failed;
     }
 

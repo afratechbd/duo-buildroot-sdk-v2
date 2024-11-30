@@ -17,6 +17,6 @@ endif()
 add_library(${PROJECT_NAME} OBJECT ${UTILS_SRC})
 
 if ((NOT DEFINED NO_OPENCV) AND ("${ENABLE_CVI_TDL_CV_UTILS}" STREQUAL "ON"))
-message("add cv-utils")  
+message("----------------------------add cv-utils------------------------------------------")  
 add_subdirectory(cv)
 endif()

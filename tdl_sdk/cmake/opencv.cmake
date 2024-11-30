@@ -41,11 +41,15 @@ set(OPENCV_INCLUDES
 
 set(OPENCV_LIBS_IMCODEC ${OPENCV_ROOT}/lib/libopencv_core.so
                         ${OPENCV_ROOT}/lib/libopencv_imgproc.so
-                        ${OPENCV_ROOT}/lib/libopencv_imgcodecs.so)
+                        ${OPENCV_ROOT}/lib/libopencv_imgcodecs.so
+                        ${OPENCV_ROOT}/lib/libopencv_videoio.so
+                        ${OPENCV_ROOT}/lib/libopencv_video.so)
 
-set(OPENCV_LIBS_IMCODEC_STATIC ${OPENCV_ROOT}/lib/libopencv_core.a
-                               ${OPENCV_ROOT}/lib/libopencv_imgproc.a
-                               ${OPENCV_ROOT}/lib/libopencv_imgcodecs.a)
+set(OPENCV_LIBS_IMCODEC_STATIC ${OPENCV_ROOT}/lib/libopencv_core.so
+                               ${OPENCV_ROOT}/lib/libopencv_imgproc.so
+                               ${OPENCV_ROOT}/lib/libopencv_imgcodecs.so
+                               ${OPENCV_ROOT}/lib/libopencv_videoio.so
+                               ${OPENCV_ROOT}/lib/libopencv_video.so)
 if (NOT "${CVI_SYSTEM_PROCESSOR}" STREQUAL "RISCV")
   set(OPENCV_LIBS_IMCODEC_STATIC ${OPENCV_LIBS_IMCODEC_STATIC}
                           ${OPENCV_ROOT}/share/OpenCV/3rdparty/lib/libtegra_hal.a)
@@ -54,12 +58,12 @@ endif()
 set(OPENCV_PATH ${CMAKE_INSTALL_PREFIX}/sample/3rd/opencv)
 
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "Release")
-install(PROGRAMS ${OPENCV_ROOT}/lib/libopencv_core.so.3.2.0 DESTINATION ${OPENCV_PATH}/lib RENAME libopencv_core.so)
-install(PROGRAMS ${OPENCV_ROOT}/lib/libopencv_imgproc.so.3.2.0 DESTINATION ${OPENCV_PATH}/lib RENAME libopencv_imgproc.so)
-install(PROGRAMS ${OPENCV_ROOT}/lib/libopencv_imgcodecs.so.3.2.0 DESTINATION ${OPENCV_PATH}/lib RENAME libopencv_imgcodecs.so)
-install(PROGRAMS ${OPENCV_ROOT}/lib/libopencv_core.so.3.2.0 DESTINATION ${OPENCV_PATH}/lib RENAME libopencv_core.so.3.2)
-install(PROGRAMS ${OPENCV_ROOT}/lib/libopencv_imgproc.so.3.2.0 DESTINATION ${OPENCV_PATH}/lib RENAME libopencv_imgproc.so.3.2)
-install(PROGRAMS ${OPENCV_ROOT}/lib/libopencv_imgcodecs.so.3.2.0 DESTINATION ${OPENCV_PATH}/lib RENAME libopencv_imgcodecs.so.3.2)
+install(PROGRAMS ${OPENCV_ROOT}/lib/libopencv_core.so.3.4.19 DESTINATION ${OPENCV_PATH}/lib RENAME libopencv_core.so)
+install(PROGRAMS ${OPENCV_ROOT}/lib/libopencv_imgproc.so.3.4.19 DESTINATION ${OPENCV_PATH}/lib RENAME libopencv_imgproc.so)
+install(PROGRAMS ${OPENCV_ROOT}/lib/libopencv_imgcodecs.so.3.4.19 DESTINATION ${OPENCV_PATH}/lib RENAME libopencv_imgcodecs.so)
+install(PROGRAMS ${OPENCV_ROOT}/lib/libopencv_core.so.3.4.19 DESTINATION ${OPENCV_PATH}/lib RENAME libopencv_core.so.3.2)
+install(PROGRAMS ${OPENCV_ROOT}/lib/libopencv_imgproc.so.3.4.19 DESTINATION ${OPENCV_PATH}/lib RENAME libopencv_imgproc.so.3.2)
+install(PROGRAMS ${OPENCV_ROOT}/lib/libopencv_imgcodecs.so.3.4.19 DESTINATION ${OPENCV_PATH}/lib RENAME libopencv_imgcodecs.so.3.2)
 else()
 file(GLOB OPENCV_LIBS "${OPENCV_ROOT}/lib/*so*")
 install(FILES ${OPENCV_LIBS} DESTINATION ${OPENCV_PATH}/lib)

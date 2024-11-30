@@ -9,6 +9,7 @@
 
 using namespace std;
 
+
 cv::Mat tformfwd(const cv::Mat &trans, const cv::Mat &uv) {
   cv::Mat uv_h = cv::Mat::ones(uv.rows, 3, CV_64FC1);
   uv.copyTo(uv_h(cv::Rect(0, 0, 2, uv.rows)));
@@ -141,7 +142,11 @@ int face_align(const cv::Mat &image, cv::Mat &aligned, const cvtdl_face_info_t &
 }
 
 int face_align_gdc(const VIDEO_FRAME_INFO_S *inFrame, VIDEO_FRAME_INFO_S *outFrame,
-                   const cvtdl_face_info_t &face_info) {
+                   const cvtdl_face_info_t &face_info) 
+{
+
+#undef CV183X
+#undef CV186X
 #if defined(CV183X) || defined(CV186X)
   if (inFrame->stVFrame.enPixelFormat != PIXEL_FORMAT_RGB_888_PLANAR &&
       inFrame->stVFrame.enPixelFormat != PIXEL_FORMAT_YUV_PLANAR_420) {

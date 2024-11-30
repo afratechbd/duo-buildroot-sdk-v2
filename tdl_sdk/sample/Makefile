@@ -129,7 +129,7 @@ SDK_APP_LIBS = -lcvi_tdl_app
 #####################################################
 OPENCV_INC_PATH = $(SDK_ROOT_PATH)/sample/3rd/opencv/include
 OPENCV_LIB_PATH = $(SDK_ROOT_PATH)/sample/3rd/opencv/lib
-OPENCV_LIBS = -lopencv_core -lopencv_imgproc -lopencv_imgcodecs
+OPENCV_LIBS = -lopencv_core -lopencv_imgproc -lopencv_imgcodecs -lopencv_videoio -lopencv_video
 
 #####################################################
 # TPU

@@ -103,6 +103,13 @@ foreach(flags CMAKE_CXX_FLAGS CMAKE_C_FLAGS)
     string(REPLACE "-O3" "-Os" ${flags} "${${flags}}")
 endforeach()
 
+
+set(CNPY_INCLUDE_PATH "${TOP_DIR}/cnpy")
+set(CVIKERNEL_INCLUDE_PATH "${TOP_DIR}/cvikernel/include")
+set(CVI_RUNTIME_INCLUDE_PATH "${TOP_DIR}/cviruntime/include")
+set(CVI_MATH_PATH "${TOP_DIR}/cvimath/include")
+
+
 message("==================================================")
 message("Branch                 ${LATEST_BRANCH}")
 message("Latest tag             ${LATEST_TAG}")
@@ -121,7 +128,13 @@ message("CMAKE_TOOLCHAIN_FILE   ${CMAKE_TOOLCHAIN_FILE}")
 message("USE_TPU_IVE            ${USE_TPU_IVE}")
 message("KERNEL_ROOT            ${KERNEL_ROOT}")
 message("CONFIG_DUAL_OS         ${CONFIG_DUAL_OS}")
+message("TOP DIRECTORY ${TOP_DIR}")
+message("CNPY_INCLUDE_PATH    ${CNPY_INCLUDE_PATH}")
+message("CVIKERNEL_INCLUDE_PATH   ${CVIKERNEL_INCLUDE_PATH}")
+message("CVI_RUNTIME_INCLUDE_PATH   ${CVI_RUNTIME_INCLUDE_PATH}")
 message("==================================================")
+
+# set other include dirs
 
 include(${CMAKE_ROOT}/Modules/ExternalProject.cmake)
 include(FetchContent)
@@ -150,7 +163,12 @@ include (cmake/cvi_rtsp.cmake)
 include_directories(${IVE_INCLUDES}
                     ${OPENCV_INCLUDES}
                     ${MLIR_INCLUDES}
-                    ${MIDDLEWARE_INCLUDES})
+                    ${MIDDLEWARE_INCLUDES}
+                    ${CVI_RUNTIME_INCLUDE_PATH}
+                    ${CVIKERNEL_INCLUDE_PATH}
+                    ${CNPY_INCLUDE_PATH}
+                    ${CVI_MATH_PATH}
+                    )
 
 add_subdirectory(modules)
 add_subdirectory(sample)

@@ -23,6 +23,8 @@ DLL_EXPORT CVI_S32 CVI_TDL_ReadImage_CenrerCrop_Resize(imgprocess_t handle, cons
 DLL_EXPORT CVI_S32 CVI_TDL_ReleaseImage(imgprocess_t handle, VIDEO_FRAME_INFO_S *frame);
 
 DLL_EXPORT CVI_S32 CVI_TDL_Destroy_ImageProcessor(imgprocess_t handle);
+DLL_EXPORT CVI_S32 read_rtsp_frame(const char *rtsp_url, VIDEO_FRAME_INFO_S *frame, 
+                                                        PIXEL_FORMAT_E format) ;
 #ifdef __cplusplus
 }
 #endif

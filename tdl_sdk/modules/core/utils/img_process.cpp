@@ -9,6 +9,7 @@
 #include "opencv2/core.hpp"
 #include "opencv2/imgcodecs.hpp"
 #include "opencv2/imgproc.hpp"
+#include "opencv2/videoio.hpp"
 
 // TODO: use memcpy
 inline void BufferRGBPackedCopy(const uint8_t *buffer, uint32_t width, uint32_t height,
@@ -357,4 +358,29 @@ CVI_S32 CVI_TDL_Destroy_ImageProcessor(imgprocess_t handle) {
     ctx = nullptr;
   }
   return 0;
+}
+
+CVI_S32 read_rtsp_frame(const char *rtsp_url, VIDEO_FRAME_INFO_S *frame, PIXEL_FORMAT_E format) {
+
+  cv::VideoCapture cap(rtsp_url);
+  
+  if(!cap.open(rtsp_url))
+  {
+    printf("Cannot Open RTSP stream %s.\n", rtsp_url);
+    cap.release(); // Release the capture object
+    return CVI_FAILURE;
+  }
+
+  cv::Mat img ;
+  bool success =  cap.read(img);
+
+  if (img.empty() || !success) {
+    printf("Cannot read image from RTSP stream %s.\n", rtsp_url);
+    cap.release(); // Release the capture object
+    return CVI_FAILURE;
+  }
+  image_buffer_copy(img, frame, format);
+
+  cap.release(); // Release the capture object
+  return CVI_SUCCESS;
 }
