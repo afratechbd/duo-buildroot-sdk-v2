@@ -1,0 +1,6 @@
+config BR2_PACKAGE_PYTHON_MODWSGI
+	bool "python-modwsgi"
+	help
+	  Apache MODWSGI
+
+	  https://pypi.python.org/pypi/mod_wsgi
